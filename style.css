@@ -1,0 +1,143 @@
+:root {
+  color-scheme: light;
+  --pink: #f7b6cf;
+  --pink-deep: #c93a74;
+  --pink-soft: #fde8f0;
+  --ink: #2b1d24;
+  --muted: #8a7480;
+  --line: #f3dbe5;
+  --card: #ffffff;
+  --changed: #b45309;
+  --changed-bg: #fff4e0;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--pink);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  -webkit-text-size-adjust: 100%;
+}
+
+button { font: inherit; cursor: pointer; }
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgba(150, 30, 80, 0.18);
+  padding: 24px 20px 20px;
+  text-align: center;
+}
+
+/* Date header */
+.nav { display: flex; align-items: center; gap: 8px; }
+.date { flex: 1; }
+.arrow {
+  width: 44px; height: 44px; flex: none;
+  border: none; border-radius: 50%;
+  background: var(--pink-soft); color: var(--pink-deep);
+  font-size: 28px; line-height: 1;
+}
+.relative {
+  display: inline-block;
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--pink-deep);
+  min-height: 1.2em;
+}
+body.not-today .relative { color: var(--changed); }
+.weekday { font-size: clamp(2rem, 9vw, 2.6rem); font-weight: 800; line-height: 1.1; }
+.fulldate { font-size: 1.15rem; color: var(--muted); margin-top: 2px; }
+
+/* Times */
+.times { margin-top: 20px; }
+.slot { padding: 16px 0; border-top: 2px solid var(--line); }
+.slot:last-child { border-bottom: 2px solid var(--line); }
+.label {
+  font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--pink-deep);
+}
+.label .sub { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--muted); }
+.time {
+  font-size: clamp(2.8rem, 15vw, 3.6rem); font-weight: 800; line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge {
+  display: none;
+  margin: 6px auto 0;
+  width: fit-content;
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--changed); background: var(--changed-bg);
+  padding: 3px 10px; border-radius: 999px;
+}
+.changed .badge { display: block; }
+.changed .time { color: var(--changed); }
+
+.noschool {
+  margin-top: 20px; padding: 26px 0;
+  border-top: 2px solid var(--line); border-bottom: 2px solid var(--line);
+}
+.noschool-text { font-size: clamp(2.4rem, 13vw, 3.2rem); font-weight: 800; color: var(--pink-deep); }
+
+/* Note */
+.note { margin-top: 18px; text-align: left; }
+.note .label { text-align: center; margin-bottom: 6px; }
+.note-text {
+  background: var(--pink-soft); border-radius: 16px; padding: 14px 16px;
+  font-size: 1.25rem; line-height: 1.4; white-space: pre-wrap; overflow-wrap: anywhere;
+  min-height: 3em;
+}
+.note-text.empty { color: var(--muted); text-align: center; font-size: 1.05rem; }
+
+.today-btn {
+  margin-top: 16px; border: none; background: var(--pink-deep); color: #fff;
+  padding: 10px 20px; border-radius: 999px; font-weight: 700; font-size: 1rem;
+}
+.status { margin-top: 10px; font-size: 0.85rem; color: var(--muted); min-height: 1em; }
+
+/* Small, out-of-the-way edit button */
+.edit-btn {
+  margin-top: 18px;
+  border: none; background: rgba(255, 255, 255, 0.45); color: #7a2a4c;
+  padding: 6px 16px; border-radius: 999px; font-size: 0.85rem;
+}
+
+/* Dialogs */
+dialog {
+  border: none; border-radius: 22px; padding: 22px 20px;
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  color: var(--ink);
+}
+dialog::backdrop { background: rgba(60, 10, 30, 0.45); }
+dialog h2 { margin: 0 0 12px; font-size: 1.4rem; }
+dialog label { display: block; font-weight: 600; margin: 12px 0 4px; }
+dialog input[type="date"], dialog input[type="time"], dialog input[type="password"], dialog textarea {
+  width: 100%; font: inherit; font-size: 16px; /* 16px stops iPhone zoom */
+  padding: 10px 12px; border: 2px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink);
+}
+dialog input:focus, dialog textarea:focus { outline: none; border-color: var(--pink-deep); }
+dialog input:disabled { opacity: 0.4; }
+dialog .check { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
+dialog .check input { width: 22px; height: 22px; accent-color: var(--pink-deep); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.hint { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+.err { color: #b91c1c; font-size: 0.9rem; min-height: 1.2em; margin-top: 8px; }
+.row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
+.row.small { justify-content: space-between; margin-top: 14px; }
+.primary, .secondary { border: none; border-radius: 999px; padding: 10px 20px; font-weight: 700; }
+.primary { background: var(--pink-deep); color: #fff; }
+.secondary { background: var(--pink-soft); color: var(--pink-deep); }
+.linkish { border: none; background: none; color: var(--muted); text-decoration: underline; padding: 4px 0; font-size: 0.9rem; }
+button:disabled { opacity: 0.5; }

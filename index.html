@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>School Schedule</title>
+  <meta name="theme-color" content="#f7b6cf">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <div class="nav">
+      <button id="prev" class="arrow" aria-label="Previous day">&#8249;</button>
+      <div class="date">
+        <div id="relative" class="relative">Today</div>
+        <div id="weekday" class="weekday"></div>
+        <div id="fulldate" class="fulldate"></div>
+      </div>
+      <button id="next" class="arrow" aria-label="Next day">&#8250;</button>
+    </div>
+
+    <section id="times" class="times">
+      <div id="dropoffSlot" class="slot">
+        <div class="label">Drop-off <span class="sub">morning</span></div>
+        <div id="dropoff" class="time"></div>
+        <div class="badge">Changed today</div>
+      </div>
+      <div id="pickupSlot" class="slot">
+        <div class="label">Pick-up <span class="sub">afternoon</span></div>
+        <div id="pickup" class="time"></div>
+        <div class="badge">Changed today</div>
+      </div>
+    </section>
+
+    <section id="noschool" class="noschool" hidden>
+      <div class="noschool-text">No school</div>
+      <div class="badge">Changed today</div>
+    </section>
+
+    <section class="note">
+      <div class="label">Note</div>
+      <div id="note" class="note-text"></div>
+    </section>
+
+    <button id="todayBtn" class="today-btn" hidden>Back to today</button>
+    <div id="status" class="status"></div>
+  </main>
+
+  <button id="editBtn" class="edit-btn">Edit</button>
+
+  <!-- One-time key entry (only the editor sees this) -->
+  <dialog id="keyDlg">
+    <form id="keyForm">
+      <h2>Edit mode</h2>
+      <p class="hint">Paste your edit key. You only need to do this once on each phone.</p>
+      <label for="keyInput">Edit key</label>
+      <input id="keyInput" type="password" autocomplete="off" spellcheck="false" required>
+      <div id="keyErr" class="err"></div>
+      <div class="row">
+        <button type="button" class="secondary" data-close>Cancel</button>
+        <button type="submit" class="primary">Continue</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Editor -->
+  <dialog id="editDlg">
+    <form id="editForm">
+      <h2>Change a day</h2>
+
+      <label for="edDate">Date</label>
+      <input id="edDate" type="date" required>
+      <div id="edUsual" class="hint"></div>
+
+      <label class="check"><input id="edNoSchool" type="checkbox"> No school this day</label>
+
+      <div class="two">
+        <div>
+          <label for="edDrop">Drop-off</label>
+          <input id="edDrop" type="time">
+        </div>
+        <div>
+          <label for="edPick">Pick-up</label>
+          <input id="edPick" type="time">
+        </div>
+      </div>
+
+      <label for="edNote">Note for Dad</label>
+      <textarea id="edNote" rows="3" placeholder="e.g. Early release, Grandma is picking me up"></textarea>
+
+      <div id="edErr" class="err"></div>
+      <div class="row">
+        <button type="button" class="secondary" data-close>Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+      <div class="row small">
+        <button type="button" id="edReset" class="linkish">Reset day to usual</button>
+        <button type="button" id="forgetKey" class="linkish">Remove key from this phone</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
