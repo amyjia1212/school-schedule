@@ -9,9 +9,9 @@ const FILE = "schedule.json";
 const DEFAULTS = {
   1: ["09:15", "15:55"], // Monday
   2: ["09:50", "15:35"], // Tuesday
-  3: ["08:30", "15:35"], // Wednesday
+  3: ["08:25", "15:35"], // Wednesday
   4: ["09:50", "15:35"], // Thursday
-  5: ["08:30", "15:35"], // Friday
+  5: ["08:25", "15:35"], // Friday
 };
 
 const API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`;
